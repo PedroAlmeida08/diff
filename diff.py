@@ -9,8 +9,16 @@ def read(filename, grain):
         elif grain == 'word':
             for line in f.read().split('\n'):
                 seq += [word for word in line.split(' ')] + ['\n']
-        else:  # grain == 'char'
+        elif  grain == 'char':
             seq += list(f.read())
+        else: #grain == 'function'
+            for line in f.read().split('\n'):
+                seq += [word for word in line.split(' ')] + ['\n']
+                function = [word for word in line.split(' ')]
+                for i in function:
+                    if i == "def":
+                        print("achou o",i)
+                    
     return seq
 
 
@@ -68,7 +76,7 @@ def main():
     parser = argparse.ArgumentParser(description='Compares two files.')
     parser.add_argument('file1', help='name of the first file')
     parser.add_argument('file2', help='name of the second file')
-    parser.add_argument('--grain', help='comparison granularity (defaults to line)', choices=['line', 'word', 'char'], default='line')
+    parser.add_argument('--grain', help='comparison granularity (defaults to line)', choices=['line', 'word', 'char', 'function'], default='line')
     args = parser.parse_args()
 
     seq1 = read(args.file1, args.grain)
