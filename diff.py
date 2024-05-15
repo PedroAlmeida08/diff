@@ -85,11 +85,11 @@ def diff(seq1, seq2, matrix):
     i = len(seq1) - 1
     j = len(seq2) - 1
     diff_seq = []
-    while i > 0 or j > 0:
-        if i > 0 and j > 0 and seq1[i] == seq2[j]:  # Same
+    while i >= 0 or j >= 0:
+        if i >= 0 and j >= 0 and seq1[i] == seq2[j]:  # Same
             diff_seq.append(seq1[i])
             i, j = i-1, j-1
-        elif i > 0 and (j == 0 or matrix[i][j-1] < matrix[i-1][j]):  # Deleted
+        elif i >= 0 and (j == 0 or matrix[i][j-1] < matrix[i-1][j]):  # Deleted
             diff_seq.append(DEL + seq1[i] + RESET)
             i -= 1
         else:  # Added
