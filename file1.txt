@@ -1,8 +1,21 @@
+if true:
+    print('Hello world!')
+    print('ok!')
+
 def add(x, y):
     sum = x + y
     return sum
 
-if
-
-def subtract(x, y):
-    return x - y
+def operations(x, y, operation):
+    if operation == 'addition':
+        return x + y
+    elif operation == 'subtraction':
+        return x - y
+    elif operation == 'multiplication':
+        return x * y
+    elif operation == 'division':
+        if y == 0:
+            return "Error: Division by zero is not allowed."
+        return x / y
+    else:
+        return "Error: Unknown operation."

@@ -15,13 +15,14 @@ def read(filename, grain):
             text = f.read().split('\n')
             i = 0
             h = "."
+            reservadas = ['def ', 'if ', 'while ', 'for ']
             for i in range(len(text)):
-                if (text[i].startswith('def ')):
+                if (text[i].startswith(reservada) for reservada in reservadas):
                     func.append(text[i])
                     j = i
                     i += 1
-                    while (h != "break") and text[i].startswith('    '):  # 1 tab == 4 spaces
-                        print("text i é ", text[i])
+                    # 1 tab == 4 spaces
+                    while (h != "break") and text[i].startswith('    '):
                         func.append(text[i])
                         text[j] = '\n'.join(func)
                         remove.append(i)
@@ -107,10 +108,10 @@ def main():
     args = parser.parse_args()
 
     seq1 = read(args.file1, args.grain)
-    # seq2 = read(args.file2, args.grain)
-    # matrix = lcs(seq1, seq2)
-    # diff_seq = diff(seq1, seq2, matrix)
-    # write(diff_seq, args.grain)
+    seq2 = read(args.file2, args.grain)
+    matrix = lcs(seq1, seq2)
+    diff_seq = diff(seq1, seq2, matrix)
+    write(diff_seq, args.grain)
 
 
 if __name__ == "__main__":

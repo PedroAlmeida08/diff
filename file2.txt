@@ -1,8 +1,16 @@
+if
+
 def add(x, y):
     return x + y
 
-if
-
-def subtract(x, y):
-    print('Subt Func')
-    return x - y
+def operations(x, y, operation):
+    if operation == 'addition':
+        return x + y
+    elif operation == 'subtraction':
+        return x - y
+    elif operation == 'multiplication':
+        return x * y
+    else operation == 'division':
+        if y == 0:
+            return "Error: Division by zero is not allowed."
+        return x / y
