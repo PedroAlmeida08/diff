@@ -1,21 +1,50 @@
 import argparse
 
 
+'''if stripped_line.startswith('def '):'''
+
+
 def read(filename, grain):
-    seq = [None]
+    seq = []
     with open(filename) as f:
         if grain == 'line':
             seq += f.read().split('\n')
+        elif grain == 'func/met':
+            func = []
+            remove = []
+            text = f.read().split('\n')
+            i = 0
+            for i in range(len(text)):
+                if (text[i].startswith('def ')):
+                    func.append(text[i])
+                    i += 1
+                    if (text[i].startswith('    ')):  # 1 tab == 4 spaces
+                        func.append(text[i])
+                        text[i - 1] = '\n'.join(func)
+                        remove.append(i)
+                        func = []
+                        i += 1
+            # Ordenando a lista 'remove' em ordem decrescente para garantir que as remoções não afetem os índices restantes
+            remove.sort(reverse=True)
+
+            for indice in remove:
+                del text[indice]
+
+            seq = text
+
         elif grain == 'word':
             for line in f.read().split('\n'):
                 seq += [word for word in line.split(' ')] + ['\n']
         else:  # grain == 'char'
             seq += list(f.read())
+
+        print('Seq ', seq)
+
     return seq
 
 
 def write(seq, grain):
-    if grain == 'line':
+    if grain == 'line' or grain == 'func/met':
         print('\n'.join(seq))
     elif grain == 'word':
         line = []
@@ -68,14 +97,15 @@ def main():
     parser = argparse.ArgumentParser(description='Compares two files.')
     parser.add_argument('file1', help='name of the first file')
     parser.add_argument('file2', help='name of the second file')
-    parser.add_argument('--grain', help='comparison granularity (defaults to line)', choices=['line', 'word', 'char'], default='line')
+    parser.add_argument('--grain', help='comparison granularity (defaults to line) -- func/met refers to function or method',
+                        choices=['line', 'word', 'char', 'func/met'], default='line')
     args = parser.parse_args()
 
     seq1 = read(args.file1, args.grain)
-    seq2 = read(args.file2, args.grain)
-    matrix = lcs(seq1, seq2)
-    diff_seq = diff(seq1, seq2, matrix)
-    write(diff_seq, args.grain)
+    # seq2 = read(args.file2, args.grain)
+    # matrix = lcs(seq1, seq2)
+    # diff_seq = diff(seq1, seq2, matrix)
+    # write(diff_seq, args.grain)
 
 
 if __name__ == "__main__":

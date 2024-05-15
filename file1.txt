@@ -1,7 +1,8 @@
-Lorem ipsum dolor
-sit amet, consectetur
-adipiscing elit.
-Phasellus rutrum eros vitae
-sollicitudin tincidunt.
-Donec sed mattis dolor,
-eu vulputate magna.
+def add(x, y):
+    sum = x + y
+    return sum
+
+if
+
+def subtract(x, y):
+    return x - y

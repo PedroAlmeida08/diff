@@ -1,7 +1,8 @@
-Lorem ipsum dolor
-eu vulputate magna.
-sit ame, consectetur
-Phasellus rutrum eros vitae
-sollicitudin tincidunt.
-Sed et tincidunt ligula.
-Donec sed mattis dolor,
+def add(x, y):
+    return x + y
+
+if
+
+def subtract(x, y):
+    print('Subt Func')
+    return x - y
