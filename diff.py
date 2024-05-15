@@ -14,16 +14,21 @@ def read(filename, grain):
             remove = []
             text = f.read().split('\n')
             i = 0
+            h = "."
             for i in range(len(text)):
                 if (text[i].startswith('def ')):
                     func.append(text[i])
+                    j = i
                     i += 1
-                    if (text[i].startswith('    ')):  # 1 tab == 4 spaces
+                    while (h != "break") and text[i].startswith('    '):  # 1 tab == 4 spaces
+                        print("text i é ", text[i])
                         func.append(text[i])
-                        text[i - 1] = '\n'.join(func)
+                        text[j] = '\n'.join(func)
                         remove.append(i)
-                        func = []
                         i += 1
+                        if i >= len(text):
+                            h = "break"
+                    func = []
             # Ordenando a lista 'remove' em ordem decrescente para garantir que as remoções não afetem os índices restantes
             remove.sort(reverse=True)
 
