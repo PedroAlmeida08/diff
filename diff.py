@@ -1,9 +1,6 @@
 import argparse
 
 
-'''if stripped_line.startswith('def '):'''
-
-
 def read(filename, grain):
     seq = []
     with open(filename) as f:
@@ -43,8 +40,6 @@ def read(filename, grain):
                 seq += [word for word in line.split(' ')] + ['\n']
         else:  # grain == 'char'
             seq += list(f.read())
-
-        print('Seq ', seq)
 
     return seq
 
